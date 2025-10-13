@@ -77,7 +77,7 @@ export default function VideoPage() {
         if(params.video_id) getVideoData();
     }, [params]);
 
-    return <DefaultLayout userData={setUser} shouldRequireUser>
+    return <DefaultLayout userData={setUser}>
 
         {videoProcessing && <div className="mb-4 p-4 bg-yellow-100 border border-yellow-500 rounded-2xl">
             <p className="text-yellow-800">Your video is still being processed. This may take a few minutes depending on the length of the video. The page will refresh automatically.</p>

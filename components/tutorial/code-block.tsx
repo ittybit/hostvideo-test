@@ -39,23 +39,31 @@ const CheckIcon = () => (
 export function CodeBlock({ code }: { code: string }) {
   const [icon, setIcon] = useState(CopyIcon);
 
+  // Format code as pretty JSON if possible
+  let formattedCode = code;
+  try {
+    formattedCode = JSON.stringify(JSON.parse(code), null, 2);
+  } catch (e) {
+    // If not valid JSON, show as is
+  }
+
   const copy = async () => {
-    await navigator?.clipboard?.writeText(code);
+    await navigator?.clipboard?.writeText(formattedCode);
     setIcon(CheckIcon);
     setTimeout(() => setIcon(CopyIcon), 2000);
   };
 
   return (
-    <pre className="bg-muted rounded-md p-6 my-6 relative">
+    <pre className="bg-muted rounded-md p-6 my-6 relative overflow-x-auto">
       <Button
         size="icon"
         onClick={copy}
         variant={"outline"}
-        className="absolute right-2 top-2"
+        className="absolute right-2 top-2 text-black"
       >
         {icon}
       </Button>
-      <code className="text-xs p-3">{code}</code>
+      <code className="text-xs p-3 text-green-500 whitespace-pre">{formattedCode}</code>
     </pre>
   );
 }

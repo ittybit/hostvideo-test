@@ -11,14 +11,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background))",
+        background: "rgba(242, 239, 236, 1)",
         foreground: "hsl(var(--foreground))",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
+          DEFAULT: "rgba(255, 255, 255, 0.9)",
           foreground: "hsl(var(--popover-foreground))",
         },
         primary: {

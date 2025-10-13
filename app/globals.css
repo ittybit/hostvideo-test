@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sonner toast styling - aggressive selectors */
+.toaster [data-sonner-toast][data-type="success"],
+.toaster .toast[data-type="success"] {
+  background: var(--success-bg) !important;
+  color: var(--success-text) !important;
+}
+.toaster [data-sonner-toast][data-type="error"],
+.toaster [data-sonner-toast][data-type="destructive"],
+.toaster .toast[data-type="error"],
+.toaster .toast[data-type="destructive"] {
+  background: var(--destructive-bg) !important;
+  color: var(--destructive-text) !important;
+}
+.toaster [data-sonner-toast],
+.toaster .toast {
+  background: var(--normal-bg) !important;
+  color: var(--normal-text) !important;
+  border: 1px solid var(--normal-border) !important;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

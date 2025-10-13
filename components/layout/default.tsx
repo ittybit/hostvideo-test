@@ -47,9 +47,6 @@ export default function DefaultLayout({ shouldRequireUser, hideSidebar, hideHead
 
     useEffect(() => {
         setUserState();
-        // setUserState is using shouldRequireUser and userData which are props and will trigger
-        // a re-render if changed, so we don't need to include them in deps
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname]);
 
     return <div className={`${sourceCodePro.className} min-h-screen flex`}>

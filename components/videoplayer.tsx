@@ -16,6 +16,14 @@ interface VideoPlayerProps {
   subtitles?: string;
 }
 
+const parseTimeToSeconds = (timeString: string): number => {
+  const parts = timeString.split(':');
+  const hours = parseInt(parts[0]);
+  const minutes = parseInt(parts[1]);
+  const seconds = parseFloat(parts[2]);
+  return hours * 3600 + minutes * 60 + seconds;
+};
+
 export function VideoPlayer({
   src,
   poster,
@@ -148,10 +156,10 @@ export function VideoPlayer({
         };
       }
     }
-  }, [subtitles, captionMode, handleSubtitleCueChange]);
+  }, [subtitles, captionMode]);
 
   // Mouse activity handling
-  const handleMouseMove = () => {
+  const handleMouseMove = React.useCallback(() => {
     setIsMouseActive(true);
     
     // Clear existing timeout
@@ -167,7 +175,7 @@ export function VideoPlayer({
     }, 3000);
     
     setMouseTimeout(timeout);
-  };
+  }, [mouseTimeout, isPlaying]);
 
   const handleMouseLeave = () => {
     // Only hide controls on mouse leave if video is playing
@@ -231,14 +239,14 @@ export function VideoPlayer({
     }
   };
 
-  const handleSubtitleCueChange = () => {
+  const handleSubtitleCueChange = React.useCallback(() => {
     if (subtitleTrack && subtitleTrack.activeCues && subtitleTrack.activeCues.length > 0) {
       const cue = subtitleTrack.activeCues[0] as VTTCue;
       setCurrentSubtitle(cue.text);
     } else {
       setCurrentSubtitle('');
     }
-  };
+  }, [subtitleTrack]);
 
   const handleTimeUpdate = () => {
     if (videoRef.current) {
@@ -409,13 +417,7 @@ export function VideoPlayer({
     }
   };
 
-  const parseTimeToSeconds = (timeString: string): number => {
-    const parts = timeString.split(':');
-    const hours = parseInt(parts[0]);
-    const minutes = parseInt(parts[1]);
-    const seconds = parseFloat(parts[2]);
-    return hours * 3600 + minutes * 60 + seconds;
-  };
+
 
   const getCurrentChapter = (currentTime: number): string => {
     // If no chapters loaded, return empty

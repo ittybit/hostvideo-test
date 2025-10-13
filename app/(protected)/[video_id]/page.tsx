@@ -75,8 +75,6 @@ export default function VideoPage() {
 
     useEffect(() => {
         if(params.video_id) getVideoData();
-        // getVideoData uses videoData and videoProcessing states internally, so we don't need to include it in deps
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params]);
 
     return <DefaultLayout userData={setUser} shouldRequireUser>

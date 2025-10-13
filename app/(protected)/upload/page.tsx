@@ -393,16 +393,12 @@ export default function UploadPage() {
         if (selectedFile) {
             handleSelectedFile();
         }
-        // handleSelectedFile uses multiple state setters internally and would cause unnecessary re-renders
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedFile]);
 
     useEffect(() => {
         if(!user) {
             loadUser();
         }
-        // loadUser is only used to initialize the user state once
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     return (

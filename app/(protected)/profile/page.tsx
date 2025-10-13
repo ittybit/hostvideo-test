@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import getUser, { updateUserProfile } from "@/lib/auth/user";
 import { Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
-import { redirect } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { redirect, useSearchParams } from "next/navigation";
 
-export default function ProfilePage({required}: {required?: boolean}) {
+function ProfileContent() {
+    const searchParams = useSearchParams();
+    const required = searchParams.get('required') === 'true';
 
     const [name, setName] = useState('');
     const [initialName, setInitialName] = useState('');
@@ -106,5 +108,13 @@ export default function ProfilePage({required}: {required?: boolean}) {
                 {/* Profile form or details would go here */}
             </LayoutSection>
         </>
+    );
+}
+
+export default function ProfilePage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ProfileContent />
+        </Suspense>
     );
 }

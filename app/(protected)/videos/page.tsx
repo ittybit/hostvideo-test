@@ -42,7 +42,7 @@ export default function VideosList() {
                 {videos.map(video => (
                     <div key={video.id} className="border rounded-lg overflow-hidden">
                         {video.image?.url ? (
-                            <Image src={video.image.url} alt={video.title || 'Video'} width={480} height={192} className="w-full h-48 object-cover" />
+                            <img src={video.image.url} alt={video.title || 'Video'} width={480} height={192} className="w-full h-48 object-cover" />
                         ) : (
                             <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
                                 <span className="text-gray-500">No Thumbnail</span>

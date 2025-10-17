@@ -67,6 +67,7 @@ export async function createTasksForVideo({ videoReference, fileId }: { videoRef
     const tasks = [
         {
             "kind": "video",
+            "format": "av1",
             "file_id": fileId,
         }, {
             "kind": "image",
